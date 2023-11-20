@@ -1,8 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
-  { path: '/', component: () => import('~/pages/home') },
-  { path: '/favorites', component: () => import('~/pages/favorites') },
+  {
+    path: '/',
+    name: 'home',
+    component: () => import('~/pages/home'),
+  },
+  {
+    path: '/favorites',
+    name: 'favorites',
+    component: () => import('~/pages/favorites'),
+  },
 ]
 
 export const router = createRouter({

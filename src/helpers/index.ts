@@ -1,0 +1,1 @@
+export { toUpperCaseFirst } from './toUpperCaseFirst'

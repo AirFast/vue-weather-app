@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import { AppHeader } from '~/components'
 import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
+  <AppHeader />
   <div>
     <a href="https://vitejs.dev" target="_blank">
       <img src="/vite.svg" class="logo" alt="Vite logo" />

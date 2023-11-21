@@ -5,7 +5,7 @@ import { useUserStorage } from '~/composables'
 
 const userStorage = useUserStorage()
 
-export const useFetchWeather = (baseUrl: string) => {
+export const useFetchWeather = <T>(baseUrl: string) => {
   const url = computed(
     () =>
       `${baseUrl}?appid=${import.meta.env.VITE_WEATHER_API_KEY}&q=${userStorage.value.city}&lang=${
@@ -13,5 +13,5 @@ export const useFetchWeather = (baseUrl: string) => {
       }`
   )
 
-  return useFetch(url, { refetch: true })
+  return useFetch<T>(url, { refetch: true })
 }

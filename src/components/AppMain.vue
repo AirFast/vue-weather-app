@@ -7,5 +7,6 @@
 <style scoped>
 .app-main {
   flex: 1 1 0%;
+  margin: 40px 0;
 }
 </style>

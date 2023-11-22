@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { onMounted, computed, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { format, addDays } from 'date-fns'
 
 import { useUserStorage } from '~/composables'
 import { setDefaultGeolocationData } from '~/helpers'
 
-import { WeatherCardCurrentDay } from '~/components'
+import { WeatherCardCurrentDay, WeatherCurrentWeek } from '~/components'
+
+const { t } = useI18n()
 
 const userStorage = useUserStorage()
 const isSetDefaultGeolocationData = computed(
@@ -28,7 +31,7 @@ const period = computed(() => {
     return todayFormatted
   }
 
-  return `${todayFormatted} - ${format(addDays(today, 5), 'PP')}`
+  return `${todayFormatted} - ${format(addDays(today, 4), 'PP')}`
 })
 
 const setDayWeatherView = () => (isTodayWeatherView.value = true)
@@ -38,25 +41,36 @@ const setWeekWeatherView = () => (isTodayWeatherView.value = false)
 <template>
   <section class="main-data">
     <article>
-      <span>{{ period }}</span>
+      <span class="period">{{ period }}</span>
       <h2>{{ userStorage.city }}, {{ userStorage.countryCode }}</h2>
     </article>
     <div class="weather-view-switcher">
-      <button :class="{ 'is-active': isTodayWeatherView }" @click="setDayWeatherView">Today</button>
-      <button :class="{ 'is-active': !isTodayWeatherView }" @click="setWeekWeatherView">The next 5 days</button>
+      <button :class="{ 'is-active': isTodayWeatherView }" @click="setDayWeatherView">{{ t('today') }}</button>
+      <button :class="{ 'is-active': !isTodayWeatherView }" @click="setWeekWeatherView">{{ t('next5Days') }}</button>
     </div>
   </section>
 
-  <section>
-    <WeatherCardCurrentDay />
+  <section class="weather-data">
+    <WeatherCardCurrentDay v-if="isTodayWeatherView" />
+    <WeatherCurrentWeek v-else />
   </section>
 </template>
 
 <style scoped>
 .main-data {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: end;
   gap: 20px;
+}
+
+.period {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.main-data h2 {
+  margin-bottom: 0;
 }
 
 .weather-view-switcher {
@@ -66,8 +80,25 @@ const setWeekWeatherView = () => (isTodayWeatherView.value = false)
 
 .weather-view-switcher button {
   font-weight: 600;
-  letter-spacing: 1px;
   padding: 14px 28px;
   text-transform: uppercase;
+}
+
+.weather-data .container {
+  align-items: center;
+}
+
+@media screen and (max-width: 992px) {
+  .weather-data .container {
+    flex-direction: column;
+    align-items: start;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .main-data {
+    flex-direction: column;
+    align-items: start;
+  }
 }
 </style>

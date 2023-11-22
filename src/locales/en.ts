@@ -7,4 +7,20 @@ export const en = {
 
   home: 'Home',
   favorites: 'Favorites',
+
+  today: 'Today',
+  next5Days: 'The next 5 days',
+  feelsLike: 'Feels like',
+  minT: 'Min',
+  maxT: 'Max',
+  cloudiness: 'Cloudiness',
+  visibility: 'Visibility',
+  wind: 'Wind',
+  humidity: 'Humidity',
+  pressure: 'Pressure',
+  sunrise: 'Sunrise',
+  sunset: 'Sunset',
+  km: 'km',
+  ms: 'm/s',
+  hPa: 'hPa',
 }

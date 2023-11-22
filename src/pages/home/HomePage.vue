@@ -25,13 +25,13 @@ const today = new Date()
 
 const isTodayWeatherView = ref(true)
 const period = computed(() => {
-  const todayFormatted = format(today, 'PP')
+  const todayFormatted = format(today, 'MMMM dd, yyyy')
 
   if (isTodayWeatherView.value) {
     return todayFormatted
   }
 
-  return `${todayFormatted} - ${format(addDays(today, 4), 'PP')}`
+  return `${todayFormatted} - ${format(addDays(today, 4), 'MMMM dd, yyyy')}`
 })
 
 const setDayWeatherView = () => (isTodayWeatherView.value = true)

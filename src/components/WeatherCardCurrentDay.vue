@@ -6,6 +6,7 @@ import { fromUnixTime, getHours, getMinutes } from 'date-fns'
 import { WeatherDayData } from '~/types'
 import { useFetchWeather } from '~/composables'
 import { toCelsius, toUpperCaseFirst } from '~/helpers'
+import { Loader } from '.'
 
 const { t } = useI18n()
 
@@ -94,6 +95,7 @@ const getTimeFromUnix = (value: number) => {
       </ul>
     </div>
   </article>
+  <Loader v-else />
 </template>
 
 <style scoped>

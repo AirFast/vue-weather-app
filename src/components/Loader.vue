@@ -10,7 +10,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100%;
+  height: 300px;
 }
 
 .loader {
@@ -20,6 +20,11 @@
   width: 50px;
   height: 50px;
   animation: spin 1s linear infinite;
+}
+
+.dark .loader {
+  border-color: var(--main-dark-text-color);
+  border-top-color: var(--main-gray-color);
 }
 
 @keyframes spin {

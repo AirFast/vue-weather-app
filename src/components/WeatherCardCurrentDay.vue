@@ -25,7 +25,7 @@ const getTimeFromUnix = (value: number) => {
       <div class="weather-icon">
         <img
           :src="`https://openweathermap.org/img/wn/${weatherData.weather.at(0)?.icon}@4x.png`"
-          :alt="weatherData.weather.at(0)?.main"
+          :alt="weatherData.weather.at(0)?.description"
         />
         <span class="description">{{ toUpperCaseFirst(weatherData.weather.at(0)?.description as string) }}</span>
       </div>

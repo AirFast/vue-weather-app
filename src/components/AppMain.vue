@@ -10,6 +10,6 @@
   margin: 40px 0;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 60px;
 }
 </style>

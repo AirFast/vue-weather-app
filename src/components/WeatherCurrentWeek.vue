@@ -17,6 +17,7 @@ const weatherData = computed<WeatherForecastData | {}>(() => {
     const datesForComparison = Array.from({ length: 5 }, (_, index) => {
       const nextDate = addDays(startOfDay(startDate), index)
       const nextDateWithSameHour = addHours(nextDate, startDate.getHours())
+
       return format(nextDateWithSameHour, 'yyyy-MM-dd HH:mm:ss')
     })
 
@@ -38,7 +39,7 @@ const weatherDataList = computed(() => (weatherData.value as WeatherForecastData
   <div v-if="weatherDataList" class="weather-list container">
     <div class="item" v-for="item in weatherDataList" :key="item.dt">
       <WeatherCard
-        :dtTxt="item.dt_txt"
+        :dt="new Date(item.dt_txt)"
         :icon="item.weather.at(0)?.icon"
         :description="item.weather.at(0)?.description"
         :temp="item.main.temp"

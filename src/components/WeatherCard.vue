@@ -7,7 +7,7 @@ import { toUpperCaseFirst, toCelsius } from '~/helpers'
 const { t } = useI18n()
 
 const {
-  dtTxt,
+  dt,
   icon,
   description,
   temp,
@@ -20,7 +20,7 @@ const {
   humidity,
   pressure,
 } = defineProps<{
-  dtTxt: string
+  dt: Date
   icon?: string
   description?: string
   temp: number
@@ -38,7 +38,7 @@ const {
 <template>
   <article class="weather-card">
     <div class="weather-icon">
-      <span class="date">{{ format(new Date(dtTxt), 'EEEE, PP') }}</span>
+      <span class="date">{{ format(dt, 'EEEE, PP') }}</span>
       <img :src="`https://openweathermap.org/img/wn/${icon}@2x.png`" :alt="description" />
       <span class="description">{{ toUpperCaseFirst(description as string) }}</span>
     </div>

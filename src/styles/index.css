@@ -1,7 +1,7 @@
 :root {
   --main-active-color: #4ade80;
-  --main-dark-text-color: #334155;
-  --main-dark-background-color: #0f172e;
+  --main-dark-color: #0f172e;
+  --main-dark-gray-color: #334155;
   --main-gray-color: #f8fafc;
 
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -21,13 +21,13 @@ body {
   min-width: 320px;
   min-height: 100vh;
 
-  color: var(--main-dark-background-color);
+  color: var(--main-dark-color);
   background-color: #ffffff;
 }
 
 .dark body {
   color: #fff;
-  background-color: var(--main-dark-background-color);
+  background-color: var(--main-dark-color);
 }
 
 a {
@@ -35,6 +35,10 @@ a {
   color: inherit;
   text-decoration: inherit;
   transition: all 0.25s ease-in-out;
+}
+
+a:hover {
+  color: var(--main-active-color);
 }
 
 h1 {
@@ -51,11 +55,18 @@ button {
   transition: all 0.2s ease-in-out;
 }
 
+input {
+  border: none;
+  outline: none;
+  background: var(--main-gray-color);
+}
+
+.dark input,
 .dark button,
 .dark .weather-data-list,
 .dark .weather-card {
   color: #fff;
-  background: var(--main-dark-text-color);
+  background: var(--main-dark-gray-color);
 }
 
 button:hover {

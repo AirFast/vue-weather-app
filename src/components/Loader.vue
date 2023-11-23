@@ -23,7 +23,7 @@
 }
 
 .dark .loader {
-  border-color: var(--main-dark-text-color);
+  border-color: var(--main-dark-gray-color);
   border-top-color: var(--main-gray-color);
 }
 

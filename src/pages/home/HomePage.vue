@@ -6,7 +6,7 @@ import { format, addDays } from 'date-fns'
 import { useUserStorage } from '~/composables'
 import { setDefaultGeolocationData } from '~/helpers'
 
-import { WeatherCardCurrentDay, WeatherCurrentWeek } from '~/components'
+import { AutocompleteInput, WeatherCardCurrentDay, WeatherChart, WeatherCurrentWeek } from '~/components'
 
 const { t } = useI18n()
 
@@ -39,6 +39,10 @@ const setWeekWeatherView = () => (isTodayWeatherView.value = false)
 </script>
 
 <template>
+  <section>
+    <AutocompleteInput />
+  </section>
+
   <section class="main-data">
     <article>
       <span class="period">{{ period }}</span>
@@ -53,6 +57,13 @@ const setWeekWeatherView = () => (isTodayWeatherView.value = false)
   <section class="weather-data">
     <WeatherCardCurrentDay v-if="isTodayWeatherView" />
     <WeatherCurrentWeek v-else />
+  </section>
+
+  <section>
+    <WeatherChart
+      :chart-labels="['23/11/2023', '24/11/2023', '25/11/2023', '26/11/2023', '27/11/2023']"
+      :chart-data="[-1, 2, 3, -1, -3]"
+    />
   </section>
 </template>
 

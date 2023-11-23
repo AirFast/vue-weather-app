@@ -33,6 +33,10 @@ const routes = router.options.routes
   margin: 20px 0;
 }
 
+.logo:hover {
+  color: inherit;
+}
+
 .logo .icons {
   position: relative;
 }

@@ -8,6 +8,12 @@ export const uk = {
   home: 'Головна',
   favorites: 'Обране',
 
+  typeCity: 'Введіть місто...',
+  note: 'Увага',
+  favoritesNote: 'Щоб додати в обране, видаліть місто. Дозволено максимум 5 локацій.',
+  viewFavorites: 'Переглянути обране',
+  favoritesBtn: 'Додати в обране',
+
   today: 'Сьогодні',
   next5Days: 'Наступні 5 днів',
   feelsLike: 'Відчувається як',

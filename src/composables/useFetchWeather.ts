@@ -5,10 +5,10 @@ import { useUserStorage } from '~/composables'
 
 const userStorage = useUserStorage()
 
-export const useFetchWeather = <T>(baseUrl: string) => {
+export const useFetchWeather = <T>(baseUrl: string, city?: string) => {
   const url = computed(
     () =>
-      `${baseUrl}?appid=${import.meta.env.VITE_WEATHER_API_KEY}&q=${userStorage.value.city}&lang=${
+      `${baseUrl}?appid=${import.meta.env.VITE_WEATHER_API_KEY}&q=${city ?? userStorage.value.city}&lang=${
         userStorage.value.lang
       }`
   )

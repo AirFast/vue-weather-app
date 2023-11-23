@@ -8,6 +8,12 @@ export const en = {
   home: 'Home',
   favorites: 'Favorites',
 
+  typeCity: 'Type a city...',
+  note: 'Note',
+  favoritesNote: 'To add to favorites, remove the city. A maximum of 5 locations is allowed.',
+  viewFavorites: 'View favorites',
+  favoritesBtn: 'Add to favorites',
+
   today: 'Today',
   next5Days: 'The next 5 days',
   feelsLike: 'Feels like',

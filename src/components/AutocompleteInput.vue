@@ -116,18 +116,18 @@ const deleteHistoryItem = (value: string) => {
 
   <div v-if="userStorage.searchHistory.length !== 0" class="search-history">
     <span class="title">{{ t('searchHistory') }}:</span>
-    <button
-      v-for="{ city, countryCode } in userStorage.searchHistory"
-      :key="city"
-      class="history-item"
-      :class="{ active: city === userStorage.city }"
-      @click="onHistoryItem({ city, countryCode })"
-    >
-      {{ city }}, {{ countryCode }}
+    <div class="history-item" v-for="{ city, countryCode } in userStorage.searchHistory" :key="city">
+      <button
+        class="history-item"
+        :class="{ active: city === userStorage.city }"
+        @click="onHistoryItem({ city, countryCode })"
+      >
+        {{ city }}, {{ countryCode }}
+      </button>
       <span class="clear" @click="deleteHistoryItem(city)">
         <XMarkIcon />
       </span>
-    </button>
+    </div>
   </div>
 
   <Teleport to="body">
@@ -201,7 +201,7 @@ const deleteHistoryItem = (value: string) => {
   transition: all 0.15s ease-in-out;
 }
 
-.search-history button .clear:hover,
+.search-history .clear:hover,
 .autocomplete-item:hover {
   color: var(--main-active-color);
 }
@@ -213,11 +213,14 @@ const deleteHistoryItem = (value: string) => {
   gap: 20px;
 }
 
-.search-history button {
+.search-history {
   position: relative;
 }
 
-.search-history button .clear {
+.search-history .clear {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   background: var(--main-gray-color);
   width: 16px;
@@ -236,7 +239,7 @@ const deleteHistoryItem = (value: string) => {
   font-weight: 600;
 }
 
-.history-item::after {
+.history-item button::after {
   content: '';
   position: absolute;
   width: calc(100%);
@@ -248,13 +251,13 @@ const deleteHistoryItem = (value: string) => {
   transition: all 0.2s ease-in-out;
 }
 
-.history-item.active {
+.history-item button.active {
   cursor: auto;
   color: inherit;
 }
 
-.history-item.active::after,
-.history-item:hover::after {
+.history-item button.active::after,
+.history-item:hover button::after {
   border-color: var(--main-active-color);
 }
 

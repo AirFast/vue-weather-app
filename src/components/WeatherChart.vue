@@ -175,9 +175,3 @@ watch(
 <template>
   <canvas ref="lineChart" class="canvas" height="300"></canvas>
 </template>
-
-<style scoped>
-.canvas {
-  margin-left: -55px;
-}
-</style>

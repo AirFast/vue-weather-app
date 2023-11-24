@@ -26,14 +26,14 @@ const weatherData = computed(() => {
     return weatherData?.list
       .filter((item) => isAfter(parseISO(item.dt_txt), startTime) && isAfter(endTime, parseISO(item.dt_txt)))
       .map((item) => ({
-        data: Number(toCelsius(item.main.temp).toFixed(0)),
+        data: Number(toCelsius(item.main.temp)),
         labels: format(parseISO(item.dt_txt), 'eee, dd / HH:mm'),
       }))
   } else {
     return weatherData?.list
       .filter((item) => hourForComparison === getHours(parseISO(item.dt_txt)))
       .map((item) => ({
-        data: Number(toCelsius(item.main.temp).toFixed(0)),
+        data: Number(toCelsius(item.main.temp)),
         labels: format(parseISO(item.dt_txt), 'MMMM, dd'),
       }))
   }

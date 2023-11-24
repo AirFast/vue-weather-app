@@ -60,10 +60,7 @@ const setWeekWeatherView = () => (isTodayWeatherView.value = false)
   </section>
 
   <section>
-    <WeatherChart
-      :chart-labels="['23/11/2023', '24/11/2023', '25/11/2023', '26/11/2023', '27/11/2023']"
-      :chart-data="[-1, 2, 3, -1, -3]"
-    />
+    <WeatherChart :is-today-weather-view="isTodayWeatherView" />
   </section>
 </template>
 

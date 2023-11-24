@@ -27,10 +27,12 @@ const getTimeFromUnix = (value: number) => {
           :src="`https://openweathermap.org/img/wn/${weatherData.weather.at(0)?.icon}@4x.png`"
           :alt="weatherData.weather.at(0)?.description"
         />
-        <span class="description">{{ toUpperCaseFirst(weatherData.weather.at(0)?.description as string) }}</span>
       </div>
 
       <div class="temperature">
+        <span class="description">
+          {{ toUpperCaseFirst(weatherData.weather.at(0)?.description as string) }}
+        </span>
         <span class="current">
           {{ toCelsius(weatherData.main.temp).toFixed(0) }}
           <span>&deg;C</span>
@@ -108,6 +110,11 @@ const getTimeFromUnix = (value: number) => {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.description {
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .temperature {

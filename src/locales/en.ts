@@ -4,6 +4,8 @@ export const en = {
   switchTo: 'Switch to',
   lightMode: 'light mode',
   darkMode: 'dark mode',
+  yes: 'Yes',
+  no: 'No',
 
   home: 'Home',
   favorites: 'Favorites',
@@ -13,6 +15,9 @@ export const en = {
   favoritesNote: 'To add to favorites, remove the city. A maximum of 5 locations is allowed.',
   viewFavorites: 'View favorites',
   favoritesBtn: 'Add to favorites',
+  favoritesRemove: 'Are you sure you want to delete this location?',
+  noFavorites: 'You have not selected any location yet...',
+  returnToHome: 'Return to home page',
 
   today: 'Today',
   next5Days: 'The next 5 days',

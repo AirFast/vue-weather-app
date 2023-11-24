@@ -2,17 +2,21 @@
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { fromUnixTime } from 'date-fns'
+import { XMarkIcon } from '@heroicons/vue/24/solid'
 
 import { Loader, WeatherCard, Modal } from '~/components'
 
-import { useFetchWeather } from '~/composables'
+import { useFetchWeather, useUserStorage } from '~/composables'
 import { WeatherDayData } from '~/types'
-
-const { t } = useI18n()
+import { useRouter } from 'vue-router'
 
 const { city } = defineProps<{
   city: string
 }>()
+
+const { push } = useRouter()
+const { t } = useI18n()
+const userStorage = useUserStorage()
 
 const isModalOpen = ref(false)
 
@@ -24,6 +28,16 @@ const closeModal = () => {
   isModalOpen.value = false
 }
 
+const onFavoriteItem = () => {
+  userStorage.value.city = weatherData.value.name
+  userStorage.value.countryCode = weatherData.value.sys.country
+  push({ name: 'home' })
+}
+
+const removeFavoriteItem = () => {
+  userStorage.value.favorites = userStorage.value.favorites.filter((item) => item !== weatherData.value.name)
+}
+
 const { data } = useFetchWeather(import.meta.env.VITE_WEATHER_DAY_API_URL, city)
 const weatherData = computed<WeatherDayData>(() => JSON.parse(data.value as string))
 </script>
@@ -31,9 +45,20 @@ const weatherData = computed<WeatherDayData>(() => JSON.parse(data.value as stri
 <template>
   <div class="item">
     <div v-if="weatherData">
-      <h3 class="favorite-city">{{ weatherData.name }}, {{ weatherData.sys.country }}</h3>
+      <div class="favorite-header">
+        <h3>{{ weatherData.name }}, {{ weatherData.sys.country }}</h3>
+
+        <div>
+          <button class="remove-btn" @click="openModal">
+            <XMarkIcon />
+          </button>
+        </div>
+      </div>
 
       <WeatherCard
+        class="favorite-card"
+        :class="{ 'is-active': userStorage.city === weatherData.name }"
+        @click="onFavoriteItem"
         :dt="fromUnixTime(weatherData.dt)"
         :icon="weatherData.weather.at(0)?.icon"
         :description="weatherData.weather.at(0)?.description"
@@ -48,18 +73,19 @@ const weatherData = computed<WeatherDayData>(() => JSON.parse(data.value as stri
         :pressure="weatherData.main.pressure"
       />
 
-      <button @click="openModal">Remove</button>
-
       <Teleport to="body">
         <Modal :isOpen="isModalOpen" @close="closeModal" name="first-modal">
           <template #header>
             {{ t('note') }}
           </template>
           <template #content>
-            <p>{{ t('favoritesNote') }}</p>
+            <p>{{ t('favoritesRemove') }}</p>
           </template>
           <template #footer>
-            <RouterLink :to="{ name: 'favorites' }">{{ t('viewFavorites') }}</RouterLink>
+            <div class="modal-btn-group">
+              <button @click="removeFavoriteItem">{{ t('yes') }}</button>
+              <button @click="closeModal">{{ t('no') }}</button>
+            </div>
           </template>
         </Modal>
       </Teleport>
@@ -74,7 +100,53 @@ const weatherData = computed<WeatherDayData>(() => JSON.parse(data.value as stri
   width: 18.126%;
 }
 
-.favorite-city {
-  text-align: center;
+.favorite-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.favorite-header h3 {
+  margin-left: 28px;
+}
+
+.favorite-card {
+  position: relative;
+  cursor: pointer;
+}
+
+.favorite-card::after {
+  content: '';
+  position: absolute;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  left: 0;
+  top: 0;
+  border: 2px solid transparent;
+  border-radius: 14px;
+  transition: all 0.2s ease-in-out;
+}
+
+.favorite-card.is-active::after,
+.favorite-card:hover::after {
+  border-color: var(--main-active-color);
+}
+
+.remove-btn {
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  border-radius: 100%;
+}
+
+.modal-btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.modal-btn-group button {
+  font-weight: 600;
 }
 </style>

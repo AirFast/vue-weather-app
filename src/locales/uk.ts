@@ -4,6 +4,8 @@ export const uk = {
   switchTo: 'Перемкнутися на',
   lightMode: 'світлий режим',
   darkMode: 'темний режим',
+  yes: 'Так',
+  no: 'Ні',
 
   home: 'Головна',
   favorites: 'Обране',
@@ -13,6 +15,9 @@ export const uk = {
   favoritesNote: 'Щоб додати в обране, видаліть місто. Дозволено максимум 5 локацій.',
   viewFavorites: 'Переглянути обране',
   favoritesBtn: 'Додати в обране',
+  favoritesRemove: 'Ви справді бажаєте видалити цю локацію?',
+  noFavorites: 'Ви ще не обрали жодної локації...',
+  returnToHome: 'Повернутися на головну сторінку',
 
   today: 'Сьогодні',
   next5Days: 'Наступні 5 днів',

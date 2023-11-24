@@ -48,7 +48,7 @@ h1 {
 
 button {
   border-radius: 8px;
-  border: 1px solid transparent;
+  border: none;
   padding: 14px;
   cursor: pointer;
   background: var(--main-gray-color);

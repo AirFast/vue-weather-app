@@ -39,7 +39,7 @@ const setWeekWeatherView = () => (isTodayWeatherView.value = false)
 </script>
 
 <template>
-  <section>
+  <section class="autocomplete-data">
     <AutocompleteInput />
   </section>
 
@@ -68,6 +68,12 @@ const setWeekWeatherView = () => (isTodayWeatherView.value = false)
 </template>
 
 <style scoped>
+.autocomplete-data {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
 .main-data {
   display: flex;
   justify-content: space-between;

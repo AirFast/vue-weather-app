@@ -11,6 +11,7 @@ export const en = {
   favorites: 'Favorites',
 
   typeCity: 'Type a city...',
+  searchHistory: 'Search history',
   note: 'Note',
   favoritesNote: 'To add to favorites, remove the city. A maximum of 5 locations is allowed.',
   viewFavorites: 'View favorites',

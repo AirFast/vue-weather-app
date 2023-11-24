@@ -11,6 +11,7 @@ export const uk = {
   favorites: 'Обране',
 
   typeCity: 'Введіть місто...',
+  searchHistory: 'Історія пошуків',
   note: 'Увага',
   favoritesNote: 'Щоб додати в обране, видаліть місто. Дозволено максимум 5 локацій.',
   viewFavorites: 'Переглянути обране',

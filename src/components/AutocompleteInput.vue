@@ -7,11 +7,9 @@ import { useUserStorage } from '~/composables'
 import { XMarkIcon } from '@heroicons/vue/24/solid'
 import { Modal } from '~/components'
 
-type LocationData = {
-  adminName1: string
-  countryCode: string
-  countryName: string
+type WeatherFindData = {
   name: string
+  sys: { country: string }
 }
 
 const { t } = useI18n()
@@ -21,27 +19,33 @@ const isModalOpen = ref(false)
 
 const isOpenList = ref(false)
 const query = ref('')
-const cities = ref<LocationData[]>([])
+const cities = ref<WeatherFindData[]>([])
 
 const fetchCities = async () => {
-  const response = await fetch(`http://api.geonames.org/searchJSON?q=${query.value}&maxRows=5&username=airfast`)
+  if (query.value.length < 3) return
+
+  const response = await fetch(
+    `https://api.openweathermap.org/data/2.5/find?q=${query.value}&type=like&sort=population&cnt=5&appid=${
+      import.meta.env.VITE_WEATHER_API_KEY
+    }`
+  )
   const data = await response.json()
 
-  const geoNames: LocationData[] = data.geonames
-
-  if (geoNames.length === 0) {
+  if (data.cod === 400) {
     return
   }
 
-  isOpenList.value = true
-  cities.value = geoNames
+  const list: WeatherFindData[] = data.list
+
+  isOpenList.value = list.length !== 0
+  cities.value = list
 }
 
-const onCitySelected = (location: LocationData) => {
+const onCitySelected = (location: WeatherFindData) => {
   query.value = location.name
 
   userStorage.value.city = location.name
-  userStorage.value.countryCode = location.countryCode
+  userStorage.value.countryCode = location.sys.country
 
   isOpenList.value = false
 
@@ -56,7 +60,7 @@ const onCitySelected = (location: LocationData) => {
   userStorage.value.searchHistory = [
     {
       city: location.name,
-      countryCode: location.countryCode,
+      countryCode: location.sys.country,
     },
     ...userStorage.value.searchHistory,
   ]
@@ -74,7 +78,7 @@ const addToFavorites = () => {
     return
   }
 
-  userStorage.value.favorites.push(query.value)
+  userStorage.value.favorites = [query.value, ...userStorage.value.favorites]
   query.value = ''
 }
 
@@ -106,7 +110,7 @@ const deleteHistoryItem = (value: string) => {
       </span>
       <ul v-if="isOpenList" class="autocomplete-list">
         <li class="autocomplete-item" v-for="city in cities" @click="onCitySelected(city)">
-          {{ city.name }}, {{ city.countryName }}
+          {{ city.name }}, {{ city.sys.country }}
         </li>
       </ul>
     </div>

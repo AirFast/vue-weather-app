@@ -46,7 +46,7 @@ const weatherData = computed<WeatherDayData>(() => JSON.parse(data.value as stri
   <div class="item">
     <div v-if="weatherData">
       <div class="favorite-header">
-        <h3>{{ weatherData.name }}, {{ weatherData.sys.country }}</h3>
+        <h4>{{ weatherData.name }}, {{ weatherData.sys.country }}</h4>
 
         <div>
           <button class="remove-btn" @click="openModal">
@@ -107,7 +107,7 @@ const weatherData = computed<WeatherDayData>(() => JSON.parse(data.value as stri
   gap: 20px;
 }
 
-.favorite-header h3 {
+.favorite-header h4 {
   margin-left: 28px;
 }
 

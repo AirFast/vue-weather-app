@@ -6,7 +6,7 @@ import { format, addDays } from 'date-fns'
 import { useUserStorage } from '~/composables'
 import { setDefaultGeolocationData } from '~/helpers'
 
-import { AutocompleteInput, WeatherCardCurrentDay, WeatherChart, WeatherCurrentWeek } from '~/components'
+import { AutocompleteInput, Loader, WeatherCardCurrentDay, WeatherChart, WeatherCurrentWeek } from '~/components'
 
 const { t } = useI18n()
 
@@ -43,7 +43,7 @@ const setWeekWeatherView = () => (isTodayWeatherView.value = false)
     <AutocompleteInput />
   </section>
 
-  <section class="main-data">
+  <section v-if="!isSetDefaultGeolocationData" class="main-data">
     <article>
       <span class="period">{{ period }}</span>
       <h2>{{ userStorage.city }}, {{ userStorage.countryCode }}</h2>
@@ -54,14 +54,16 @@ const setWeekWeatherView = () => (isTodayWeatherView.value = false)
     </div>
   </section>
 
-  <section class="weather-data">
+  <section v-if="!isSetDefaultGeolocationData" class="weather-data">
     <WeatherCardCurrentDay v-if="isTodayWeatherView" />
     <WeatherCurrentWeek v-else />
   </section>
 
-  <section>
+  <section v-if="!isSetDefaultGeolocationData">
     <WeatherChart :is-today-weather-view="isTodayWeatherView" />
   </section>
+
+  <Loader v-if="isSetDefaultGeolocationData" />
 </template>
 
 <style scoped>

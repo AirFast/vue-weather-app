@@ -1,18 +1,13 @@
 export type GeolocationData = {
-  as: string
   city: string
   country: string
-  countryCode: string
-  isp: string
-  lat: number
-  lon: number
+  hostname: string
+  ip: string
+  loc: string
   org: string
-  query: string
+  postal: string
   region: string
-  regionName: string
-  status: string
   timezone: string
-  zip: string
 }
 
 export type WeatherDayData = {

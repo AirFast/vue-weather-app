@@ -114,10 +114,10 @@ const weatherData = computed<WeatherDayData>(() => JSON.parse(data.value as stri
 .favorite-card::after {
   content: '';
   position: absolute;
-  width: calc(100% + 2px);
-  height: calc(100% + 2px);
-  left: 0;
-  top: 0;
+  width: calc(100% + 6px);
+  height: calc(100% + 6px);
+  left: -5px;
+  top: -5px;
   border: 2px solid transparent;
   border-radius: 14px;
   transition: all 0.2s ease-in-out;

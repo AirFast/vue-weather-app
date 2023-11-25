@@ -115,7 +115,7 @@ const deleteHistoryItem = (value: string) => {
       </ul>
     </div>
 
-    <button v-if="query" class="favorites-btn" @click="addToFavorites">{{ t('favoritesBtn') }}</button>
+    <button v-if="isOpenList" class="favorites-btn" @click="addToFavorites">{{ t('favoritesBtn') }}</button>
   </div>
 
   <div v-if="userStorage.searchHistory.length !== 0" class="search-history">
@@ -154,6 +154,7 @@ const deleteHistoryItem = (value: string) => {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
 }
 
 .autocomplete {
@@ -171,6 +172,7 @@ const deleteHistoryItem = (value: string) => {
   transform: translateY(-50%);
   transition: all 0.2s ease-in-out;
   cursor: pointer;
+  z-index: 1;
 }
 
 .autocomplete .clear:hover {
@@ -191,11 +193,11 @@ const deleteHistoryItem = (value: string) => {
   padding: 8px 0;
   background: var(--main-gray-color);
   border-radius: 8px;
-  z-index: 1;
+  z-index: 2;
 }
 
 .dark .autocomplete-list,
-.dark .search-history button .clear {
+.dark .search-history .clear {
   background: var(--main-dark-gray-color);
 }
 
@@ -275,5 +277,13 @@ const deleteHistoryItem = (value: string) => {
   font-weight: 600;
   padding: 14px 28px;
   text-transform: uppercase;
+}
+
+@media screen and (max-width: 600px) {
+  .autocomplete-container {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: start;
+  }
 }
 </style>

@@ -95,11 +95,6 @@ const weatherData = computed<WeatherDayData>(() => JSON.parse(data.value as stri
 </template>
 
 <style scoped>
-.item {
-  flex: 0 0 auto;
-  width: 18.126%;
-}
-
 .favorite-header {
   display: flex;
   justify-content: space-between;

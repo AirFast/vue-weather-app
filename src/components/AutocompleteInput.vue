@@ -115,7 +115,7 @@ const deleteHistoryItem = (value: string) => {
       </ul>
     </div>
 
-    <button v-if="isOpenList" class="favorites-btn" @click="addToFavorites">{{ t('favoritesBtn') }}</button>
+    <button v-if="query" class="favorites-btn" @click="addToFavorites">{{ t('favoritesBtn') }}</button>
   </div>
 
   <div v-if="userStorage.searchHistory.length !== 0" class="search-history">

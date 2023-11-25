@@ -144,4 +144,11 @@ const weatherData = computed<WeatherDayData>(() => JSON.parse(data.value as stri
 .modal-btn-group button {
   font-weight: 600;
 }
+
+@media screen and (min-width: 1200px) {
+  .item {
+    flex: 0 0 auto;
+    width: 18.126%;
+  }
+}
 </style>

@@ -1,42 +1,25 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { addDays, startOfDay, addHours, format } from 'date-fns'
+import { parseISO, getHours } from 'date-fns'
 
 import { WeatherForecastData } from '~/types'
 import { useFetchWeather } from '~/composables'
 
-import { Loader, WeatherCard } from '.'
+import { WeatherCard } from '.'
 
-const { data } = useFetchWeather(import.meta.env.VITE_WEATHER_WEEK_API_URL)
-const weatherData = computed<WeatherForecastData | {}>(() => {
-  if (data.value) {
-    const weatherData: WeatherForecastData = JSON.parse(data.value as string)
-    const dateForComparison = weatherData.list.at(0)?.dt_txt
+const { data } = await useFetchWeather(import.meta.env.VITE_WEATHER_WEEK_API_URL).json<WeatherForecastData>()
 
-    const startDate = new Date(dateForComparison as string)
-    const datesForComparison = Array.from({ length: 5 }, (_, index) => {
-      const nextDate = addDays(startOfDay(startDate), index)
-      const nextDateWithSameHour = addHours(nextDate, startDate.getHours())
+const weatherDataList = computed(() => {
+  const weatherDataList = data.value?.list
+  const startTime = parseISO(weatherDataList?.at(0)?.dt_txt as string)
+  const hourForComparison = getHours(startTime)
 
-      return format(nextDateWithSameHour, 'yyyy-MM-dd HH:mm:ss')
-    })
-
-    const weatherDataList = weatherData.list.filter((item) => datesForComparison.includes(item.dt_txt))
-
-    return {
-      ...weatherData,
-      list: weatherDataList,
-    }
-  } else {
-    return {}
-  }
+  return weatherDataList?.filter((item) => hourForComparison === getHours(parseISO(item.dt_txt)))
 })
-
-const weatherDataList = computed(() => (weatherData.value as WeatherForecastData).list)
 </script>
 
 <template>
-  <div v-if="weatherDataList" class="weather-list container">
+  <div class="weather-list container">
     <div class="item" v-for="item in weatherDataList" :key="item.dt">
       <WeatherCard
         :dt="new Date(item.dt_txt)"
@@ -54,7 +37,6 @@ const weatherDataList = computed(() => (weatherData.value as WeatherForecastData
       />
     </div>
   </div>
-  <Loader v-else />
 </template>
 
 <style scoped>

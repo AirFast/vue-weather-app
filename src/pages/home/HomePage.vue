@@ -54,10 +54,18 @@ const setWeekWeatherView = () => (isTodayWeatherView.value = false)
     </div>
   </section>
 
-  <section v-if="!isSetDefaultGeolocationData" class="weather-data">
-    <WeatherCardCurrentDay v-if="isTodayWeatherView" />
-    <WeatherCurrentWeek v-else />
-  </section>
+  <Suspense>
+    <template #default>
+      <section v-if="!isSetDefaultGeolocationData" class="weather-data">
+        <WeatherCardCurrentDay v-if="isTodayWeatherView" />
+        <WeatherCurrentWeek v-else />
+      </section>
+    </template>
+
+    <template #fallback>
+      <Loader />
+    </template>
+  </Suspense>
 
   <section v-if="!isSetDefaultGeolocationData">
     <WeatherChart :is-today-weather-view="isTodayWeatherView" />

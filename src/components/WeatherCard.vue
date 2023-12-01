@@ -6,33 +6,21 @@ import { toUpperCaseFirst, toCelsius } from '~/helpers'
 
 const { t } = useI18n()
 
-const {
-  dt,
-  icon,
-  description,
-  temp,
-  feelsLike,
-  tempMin,
-  tempMax,
-  clouds,
-  visibility,
-  windSpeed,
-  humidity,
-  pressure,
-} = defineProps<{
-  dt: Date
-  icon?: string
-  description?: string
-  temp: number
-  feelsLike: number
-  tempMin: number
-  tempMax: number
-  clouds: number
-  visibility: number
-  windSpeed: number
-  humidity: number
-  pressure: number
-}>()
+const { dt, icon, description, temp, feelsLike, tempMin, tempMax, clouds, visibility, windSpeed, humidity, pressure } =
+  defineProps<{
+    dt: Date
+    icon?: string
+    description?: string
+    temp: number
+    feelsLike: number
+    tempMin: number
+    tempMax: number
+    clouds: number
+    visibility: number
+    windSpeed: number
+    humidity: number
+    pressure: number
+  }>()
 </script>
 
 <template>
@@ -45,12 +33,12 @@ const {
 
     <div class="temperature">
       <span class="current">
-        {{ toCelsius(temp).toFixed(0) }}
+        {{ Math.round(toCelsius(temp)).toFixed(0) }}
         <span>&deg;C</span>
       </span>
       <span class="feels-like">
         {{ t('feelsLike') }}:
-        {{ toCelsius(feelsLike).toFixed(0) }}
+        {{ Math.round(toCelsius(feelsLike)).toFixed(0) }}
         <span>&deg;C</span>
       </span>
     </div>
@@ -59,12 +47,12 @@ const {
       <ul class="weather-data-list">
         <li>
           <span class="list-item-description">{{ t('minT') }}:</span>
-          {{ toCelsius(tempMin).toFixed(0) }}
+          {{ Math.round(toCelsius(tempMin)).toFixed(0) }}
           <span>&deg;C</span>
         </li>
         <li>
           <span class="list-item-description">{{ t('maxT') }}:</span>
-          {{ toCelsius(tempMax).toFixed(0) }}
+          {{ Math.round(toCelsius(tempMax)).toFixed(0) }}
           <span>&deg;C</span>
         </li>
         <li>

@@ -34,12 +34,12 @@ const getTimeFromUnix = (value: number) => {
           {{ toUpperCaseFirst(weatherData.weather.at(0)?.description as string) }}
         </span>
         <span class="current">
-          {{ toCelsius(weatherData.main.temp).toFixed(0) }}
+          {{ Math.round(toCelsius(weatherData.main.temp)).toFixed(0) }}
           <span>&deg;C</span>
         </span>
         <span class="feels-like">
           {{ t('feelsLike') }}:
-          {{ toCelsius(weatherData.main.feels_like).toFixed(0) }}
+          {{ Math.round(toCelsius(weatherData.main.feels_like)).toFixed(0) }}
           <span>&deg;C</span>
         </span>
       </div>
@@ -49,12 +49,12 @@ const getTimeFromUnix = (value: number) => {
       <ul class="weather-data-list">
         <li>
           <span class="list-item-description">{{ t('minT') }}:</span>
-          {{ toCelsius(weatherData.main.temp_min).toFixed(0) }}
+          {{ Math.round(toCelsius(weatherData.main.temp_min)).toFixed(0) }}
           <span>&deg;C</span>
         </li>
         <li>
           <span class="list-item-description">{{ t('maxT') }}:</span>
-          {{ toCelsius(weatherData.main.temp_max).toFixed(0) }}
+          {{ Math.round(toCelsius(weatherData.main.temp_max)).toFixed(0) }}
           <span>&deg;C</span>
         </li>
         <li>
